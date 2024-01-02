@@ -54,7 +54,7 @@ bool ActorBase::PushAck(TaskPullBase* msg)
 		TaskBase* head = m_queue[m_head];
 		assert(head->m_taskType == task_async);
 		TaskAsync* asyncTask = static_cast<TaskAsync*>(head);
-		if (asyncTask->m_session == asyncTask->m_session) {
+		if (asyncTask->m_session == msg->m_session) {
 			if (asyncTask->m_srcAckSeq == msg->m_dstAckSeq) {
 				if (asyncTask->AppendAck(msg)) {
 					m_group->BlockToRunOnAckAll(this);
